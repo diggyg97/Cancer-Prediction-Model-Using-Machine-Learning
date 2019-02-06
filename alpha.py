@@ -1,4 +1,8 @@
 import pandas as pd
+from sklearn import linear_model
+import numpy as np
+
+#Function to check for valid input.
 def int_check(l,h,message):
     while True:
         s = input(message)
@@ -11,19 +15,12 @@ def int_check(l,h,message):
         else:
             print("\nError in input, please try again.")
 
-def csv_display(directory,index,z):
-    s = pd.read_csv(directory)
-    print(s)
-    o = int_check(1,2,"\nWould you like to predict future values?\n\n1. Yes\n2. No\n\nChoose a corresponding number: ")
-    if o==1:
-        n = int_check(0,36,'\nWhich one of the following places would you like to predict the future values for?\n\n{}\n\nPlease choose the corresponding integer: '.format(s.iloc[:,0].to_string()))
-        i=0
-    return s
-
+#Initial choice.
 a = int_check(1,4,"\nAre you:\n\n1. A Person looking for likelihood of Cancer?\n2. An Insurance Company?\n3. A Medical Researcher?\n4. A Pharmaceutical Company?\n\nPlease choose the integer corresponding to the dataset you'd like to access: ")
+
 if a==1:
-    gender = int_check(1,3,"\nThis prediction model will predict the probability of the likelihood of you being affected by lung cancer. We will ask from you, a series of inputs, please input the corresponding values as per your need.\n\nFirst Parameter:\nWhat is your gender?\n1. Female\n2. Male\n3. Other\n\nPlease Enter an integer corresponding to your choice: ")
-    age = int_check(1,10,"\nSecond Parameter:\nWhat age group do you belong to?:\n1. 18-40\n2. 40-45\n3. 45-50\n4. 50-55\n5. 55-60\n6. 60-65\n7. 65-70\n8. 70-75\n9. 75-80\n10. 80+\nPlease enter the integer corresponding to your age group: ")
+    gender = int_check(1,2,"\nThis prediction model will predict the probability of the likelihood of you being affected by lung cancer. We will ask from you, a series of inputs, please input the corresponding values as per your need.\n\nFirst Parameter:\nWhat is your gender?\n1. Female\n2. Male \n\nPlease Enter an integer corresponding to your choice: ")
+    age = int_check(18,123,"\nSecond Parameter:\nWhat is your age?\nPlease input your age (between 18-123, inclusive): ")
     smoking = int_check(1,2, "\nThird Paramenter:\nDo you smoke?\n1. No\n2. Yes\nPlease enter the integer corresponding to your smoking preference: ")
     fingers = int_check(1,2,"\nFourth Parameter:\nDo you have yellow Fingers?\n1. No\n2. Yes\nPlease enter the corresponding integer: ")
     anxiety = int_check(1,2,"\nFifth Parameter:\nHave you been medically diagnosed with anxiety?\n1. No\n2. Yes\nPlease enter the corresponding integer: ")
@@ -38,9 +35,18 @@ if a==1:
     swallow = int_check(1,2,"\nFifteenth Parameter:\nDo you have difficulty in swallowing?\n1. No\n2. Yes\nPlease enter the corresponding integer: ")
     chest = int_check(1,2,"\nSixteenth Parameter:\nDo you suffer from chest pain?\n1. No\n2. Yes\nPlease enter the corresponding integer: ")
     s = pd.read_csv('/Users/digvijayghotane/Desktop/codecell/lung-cancer-data.csv')
+    label = s['LUNG CANCER']
+    features = s.drop('LUNG CANCER', axis=1)
+    l = linear_model.LinearRegression()
+    l.fit(features,label)
+    o = l.predict([[gender, age, smoking, fingers, anxiety, peer_pressure, chronic, fatigue, allergy, wheeze, alcohol, coughing, breath, swallow, chest]])
+    o=float(o)
+    o=(o-1)*100
+    print("You have a",o,"percent chance of getting cancer.")
+    
 elif a==2:
-    print("u noob")
+    print("Yet to code.")
 elif a==3:
-    print("u noob")
+    print("Yet to code.")
 elif a==4:
-    print("u noob")
+    print("Yet to code.")
