@@ -2,8 +2,6 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score
-
 #Function to check for valid input.
 def int_check(l,h,message):
     while True:
@@ -91,12 +89,13 @@ def cure_procedure():
     return o
 
 #Initial choice.
-a = int_check(1,4,"\nAre you:\n\n1. A Person checking your likelihood of Cancer?\n2. An Insurance Company?\n3. A Medical Researcher?\n4. A Pharmaceutical Company?\n\nPlease choose the integer corresponding to the dataset you'd like to access: ")
-
+a = int_check(1,3,"\nAre you:\n\n1. A Person checking your likelihood of Cancer?\n2. An Insurance Company?\n3. A Medical Researcher?\n\nPlease choose the integer corresponding to the dataset you'd like to access: ")
 if a==1: #Personal Use
     print("\nThis prediction model will predict the probability of the likelihood of you being affected by lung cancer. We will ask from you, a series of inputs, please input the corresponding values as per your need.")
     b,c,d = cancer_prob()
-    print("You have a",float(b[:,1])*100,"percent chance of getting cancer.")
+    print("You have a",round(float(b[:,1]),2)*100,"percent chance of getting cancer.")
+    plt.plot(pd.read_csv('/Users/digvijayghotane/Desktop/codecell/datasets/lung-cancer-data.csv'))
+    plt.show()
 elif a==2: #Insurance
     b = int_check(1,2,"\nPlease enter the amount of years you want the policy for:\n\n1. 20 years\n2. 30 years.\n\nPlease enter the corresponding integer: ")
     print("\n\nPlease fill in the details to the questions that are going to be asked to receive an appropriate plan for you.")
@@ -117,10 +116,6 @@ elif a==2: #Insurance
                 insurance_op('/Users/digvijayghotane/Desktop/codecell/datasets/30yr-high-risk.csv',d,e)
     else:
         print("The client does not meet the age requirements for purchasing a policy.")
-elif a==3:
+elif a==3: #Medical Researcher
     b = cure_procedure()
-    print("You have a",float(b[:,1])*100,"percent chance of curing cancer.")
-
-elif a==4:
-    print("Yet to code.")
-
+    print("You have a",round(float(b[:,1]),2)*100,"percent chance of curing cancer.")
