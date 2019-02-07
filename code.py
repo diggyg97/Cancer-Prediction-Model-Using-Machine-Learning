@@ -98,6 +98,7 @@ elif a==2: #Insurance
     b = int_check(1,2,"\nPlease enter the amount of years you want the policy for:\n\n1. 20 years\n2. 30 years.\n\nPlease enter the corresponding integer: ")
     print("\n\nPlease fill in the details to the questions that are going to be asked to receive an appropriate plan for you.")
     c,d,e = cancer_prob()
+    c=c[:,1]
     if 20<=d<=65:
         print("\nCongratulations, you're eligible for purchasing a policy! According to the information provided by you, these are the premium rates most conducive to you as per the policies offered by us.")
         if 0<=c<=50:
@@ -106,7 +107,7 @@ elif a==2: #Insurance
                 insurance_op('/Users/digvijayghotane/Desktop/codecell/datasets/20yr-low-risk.csv',d,e)
             elif b==2:
                 insurance_op('/Users/digvijayghotane/Desktop/codecell/datasets/30yr-low-risk.csv',d,e)
-        elif 50<c<=100 or d>60:
+        elif 50<=c<=100:
             print("\n\nThis is a high risk policy.")
             if b==1:
                 insurance_op('/Users/digvijayghotane/Desktop/codecell/datasets/20yr-high-risk.csv',d,e)
