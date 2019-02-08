@@ -8,3 +8,5 @@ Application 2: For an insurance company to display their insurance premium accor
 Application 3: For a medical researcher to know how effective their method employed to combat cancer is.
 
 All of this is possible due to data fed to the library to learn from it. The training data and testing data for this code for the Random Forest Classifier is divided as 70% and 30% respectively. The algorithm thus shows an accuracy between 85%-95%.
+
+The 'datasets' folder contains all the specified contents.
