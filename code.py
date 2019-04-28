@@ -47,11 +47,13 @@ def cancer_prob():
     swallow=swallow-1
     chest = int_check(1,2,"\nFifteenth Parameter:\n\nDo you suffer from chest pain?\n1. No\n2. Yes\n\nPlease enter the corresponding integer: ")
     chest=chest-1
-    s = pd.read_csv('/Users/digvijayghotane/Desktop/codecell/datasets/lung-cancer-data.csv')
-    label = s['LUNG CANCER']
-    features = s.drop('LUNG CANCER', axis=1)
+    s = pd.read_csv('datasets/lung-cancer-data.csv')
+    label = s['LUNG CANCER'].values
+    features = s.drop('LUNG CANCER', axis=1).values
     features_train, features_test, label_train, label_test = train_test_split(features, label, test_size = 0.3)
     l = RandomForestClassifier(n_estimators=100)
+    label_train = label_train.reshape(-1,1)
+    label_test = label_test.reshape(-1,1)
     l.fit(features_train,label_train)
     o = l.predict_proba([[gender, age, smoking, fingers, anxiety, peer_pressure, chronic, fatigue, allergy, wheeze, alcohol, coughing, breath, swallow, chest]])
     return o,age,gender
@@ -79,7 +81,7 @@ def cure_procedure():
     treatment = treatment - 1
     chemo_therapy = int_check(1,2,"\nDo you want chemotherapy?\n\n1. No\n2. Yes\n\nPlease choose the corresponding integer: ")
     chemo_therapy = chemo_therapy - 1
-    s = pd.read_csv('/Users/digvijayghotane/Desktop/codecell/datasets/procedure.csv')
+    s = pd.read_csv('datasets/procedure.csv')
     label = s['CURE']
     features = s.drop('CURE',axis=1)
     features_train, features_test, label_train, label_test = train_test_split(features, label, test_size = 0.3)
@@ -104,15 +106,15 @@ elif a==2: #Insurance
         if 0<=c<=50:
             print("\n\nThis is a low risk policy.")
             if b==1:
-                insurance_op('/Users/digvijayghotane/Desktop/codecell/datasets/20yr-low-risk.csv',d,e)
+                insurance_op('datasets/20yr-low-risk.csv',d,e)
             elif b==2:
-                insurance_op('/Users/digvijayghotane/Desktop/codecell/datasets/30yr-low-risk.csv',d,e)
+                insurance_op('datasets/30yr-low-risk.csv',d,e)
         elif 50<=c<=100:
             print("\n\nThis is a high risk policy.")
             if b==1:
-                insurance_op('/Users/digvijayghotane/Desktop/codecell/datasets/20yr-high-risk.csv',d,e)
+                insurance_op('datasets/20yr-high-risk.csv',d,e)
             elif b==2:
-                insurance_op('/Users/digvijayghotane/Desktop/codecell/datasets/30yr-high-risk.csv',d,e)
+                insurance_op('datasets/30yr-high-risk.csv',d,e)
     else:
         print("The client does not meet the age requirements for purchasing a policy.")
 elif a==3: #Medical Researcher
