@@ -10,3 +10,4 @@ Application 3: For a medical researcher to know how effective their method emplo
 All of this is possible due to data fed to the library to learn from it. The training data and testing data for this code for the Random Forest Classifier is divided as 70% and 30% respectively. The algorithm thus shows an accuracy between 85%-95%.
 
 The 'datasets' folder contains all the specified contents.
+The 'Working of Project' folder shows two videos predicting the risk of cancer for two different 60 year old males who have healthy and unhealthy habits.
